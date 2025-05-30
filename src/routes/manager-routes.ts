@@ -1,12 +1,12 @@
 import express from 'express';
-import {  updateManager, deleteManager, getAllManagers, getManagerById, createManager } from '../controllers/manager-controller';
+import { create, getAll, getOne, remove, update } from '../controllers/manager-controller';
 
 const managerRoutes = express.Router();
 
-managerRoutes.get("/get", getAllManagers)
-managerRoutes.get("/get/:id", getManagerById)
-managerRoutes.post("/post", createManager)
-managerRoutes.put("/update/:id", updateManager)
-managerRoutes.delete("/delete/:id", deleteManager)
+managerRoutes.get("/get", getAll)
+managerRoutes.get("/get/:id", getOne)
+managerRoutes.post("/post", create)
+managerRoutes.put("/update/:id", update)
+managerRoutes.delete("/delete/:id", remove)
 
 export default managerRoutes;
