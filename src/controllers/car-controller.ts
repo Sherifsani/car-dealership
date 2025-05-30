@@ -31,6 +31,27 @@ export const getAllCars = async (req: Request, res: Response) => {
     }
 }
 
+export const getCarById = async (req: Request, res: Response) => {
+    try{
+        const id = req.params.id
+        const targetCar = await Car.findById(id)
+        if(!targetCar){
+            res.status(404).json({
+                success: false,
+                message: "Car not found"
+            })
+        }
+        res.status(200).json({
+            success: true,
+            data: targetCar,
+        })
+    }
+    catch (err) {
+        console.log(err);
+        res.status(500).json({ message: err instanceof Error ? err.message : String(err) });
+    }
+}
+
 export const deleteCar = async (req: Request, res: Response) => {
     try{
         const carId = req.params.id
@@ -52,4 +73,20 @@ export const deleteCar = async (req: Request, res: Response) => {
     }
 }
 
-// export default { getAllCars, addCar };
+export const updateCar = async (req: Request, res: Response) => {
+    try{
+        const carId = req.params.id
+        const targetCar = await Car.findByIdAndUpdate(carId, req.body, {new: true})
+        if(!targetCar){
+            res.status(404).json({
+                success: false,
+                message: "Car not found"
+            })
+        }
+    }catch (err) {
+        console.log(err);
+        res.status(500).json({ message: err instanceof Error ? err.message : String(err) });
+    }
+
+}
+
