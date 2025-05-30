@@ -3,10 +3,10 @@ import {getAllCars, addCar, deleteCar, getCarById, updateCar} from "../controlle
 
 const carRoutes = express.Router()
 
-carRoutes.get("/", getAllCars)
+carRoutes.get("/get", getAllCars)
 carRoutes.post("/post", addCar)
 carRoutes.delete("/delete/:id", deleteCar)
-carRoutes.get("/:id", getCarById)
+carRoutes.get("/get/:id", getCarById)
 carRoutes.put("/update/:id", updateCar)
 
 export default carRoutes
