@@ -1,5 +1,5 @@
 import express from 'express';
-import { create, getAll, getOne, remove, update } from '../controllers/category-controller';
+import { create, getAll, getOne, remove, update } from '../controllers/crud/category-controller';
 
 const categoryRoutes = express.Router();
 

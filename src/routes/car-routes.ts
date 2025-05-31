@@ -1,5 +1,5 @@
 import express from "express"
-import {create, getAll, getOne, remove, update} from "../controllers/car-controller"
+import {create, getAll, getOne, remove, update} from "../controllers/crud/car-controller"
 
 const carRoutes = express.Router()
 

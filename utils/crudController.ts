@@ -76,7 +76,7 @@ export const generateCrudControllers = (model: Model<any>) => {
                 const resourceId = req.params.id
                 const targetResource = await model.findByIdAndUpdate(resourceId, req.body, {new: true})
                 if(!targetResource){
-                    res.status(404).json({
+                    return res.status(404).json({
                         success: false,
                         message: "Resource not found"
                     })

@@ -1,5 +1,5 @@
 import express from 'express';
-import { create, getAll, getOne, remove, update } from '../controllers/customer-controller';
+import { create, getAll, getOne, remove, update } from '../controllers/crud/customer-controller';
 
 const customerRoutes = express.Router();
 
