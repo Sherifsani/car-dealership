@@ -1,4 +1,4 @@
-import jsonwebtoken from "jsonwebtoken"
+import jwt from "jsonwebtoken"
 import { Request, Response } from "express"
 import bcrypt from "bcrypt"
 import {Model as mongooseModel} from "mongoose";
@@ -50,4 +50,49 @@ export const register = async (req: Request, res: Response) => {
         })
     }
 }
-export const login = async (req: Request, res: Response) => {}
+export const login = async (req: Request, res: Response) => {
+    try{
+        const {role, email, password} = req.body
+        const Model = (role == "customer" ? Customer: Manager) as mongooseModel<any>
+        const user = await Model.findOne({email})
+
+        if(user){
+            res.status(404).json({
+                success: false,
+                message:"user not found"
+            })
+        }
+
+        const isPasswordMatch = await bcrypt.compare(password, user.password)
+        if(!isPasswordMatch){
+            return res.status(400).json({
+                success: false,
+                message: "Password is incorrect"
+            })
+        }
+        const accessToken = jwt.sign(
+            {
+                userId: user.id,
+                email: email,
+                role: role,
+            },
+            process.env.JWT_SECRET,
+            {
+                expiresIn:"1d"
+            }
+        )
+        return res.status(200).json({
+            success: true,
+            message:"user login is successful",
+            accessToken
+        })
+
+
+    }catch(err){
+        console.log(err)
+        res.status(500).json({
+            success: false,
+            error: "Internal Server Error"
+        })
+    }
+}
