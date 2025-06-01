@@ -96,3 +96,45 @@ export const login = async (req: Request, res: Response) => {
         })
     }
 }
+export const changePassword = async(req: Request, res: Response) => {
+    try{
+        const { email, oldPassword, newPassword, role } = req.body
+        if(!email || !oldPassword || !newPassword) {
+            res.status(400).json({
+                success: false,
+                message: "please pass your email and  password"
+            })
+        }
+        const Model = (role == "manager" ? Manager: Customer) as mongooseModel<any>
+        const user = await Model.findOne({email})
+        if(!user){
+            res.status(400).json({
+                success: false,
+                message: "User not found"
+            })
+        }
+        const isPasswordMatch = await bcrypt.compare(oldPassword, user.password)
+        if(!isPasswordMatch){
+            res.status(400).json({
+                success: false,
+                message: "invalid credentials"
+            })
+        }
+
+        const salt = await bcrypt.genSalt(10)
+        const hashedPassword = await bcrypt.hash(newPassword, salt)
+
+        user.password = hashedPassword
+        await user.save()
+        res.status(200).json({
+            success: true,
+            message: "password changed successfully",
+        })
+    }catch(err){
+        console.log(err)
+        res.status(500).json({
+             success: false,
+             message: "Error changing password"
+        })
+    }
+}
