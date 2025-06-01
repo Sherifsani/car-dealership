@@ -12,8 +12,8 @@ export const register = async (req: Request, res: Response) => {
             success: false,
             message: "Invalid request body"
         });
-
-        const Model = (formBody.role == "customer" ? Customer: Manager) as mongooseModel<any>
+        const role =  formBody.role || "customer"
+        const Model = (role == "manager"? Manager: Customer) as mongooseModel<any>
         const existingUser = await Model.findOne({email: formBody.email}).exec()
         if(existingUser){
             return res.status(400).json({
@@ -56,7 +56,7 @@ export const login = async (req: Request, res: Response) => {
         const Model = (role == "customer" ? Customer: Manager) as mongooseModel<any>
         const user = await Model.findOne({email})
 
-        if(user){
+        if(!user){
             res.status(404).json({
                 success: false,
                 message:"user not found"
