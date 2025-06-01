@@ -12,7 +12,7 @@ export const register = async (req: Request, res: Response) => {
             success: false,
             message: "Invalid request body"
         });
-        const role =  formBody.role || "customer"
+        const role =  formBody.role
         const Model = (role == "manager"? Manager: Customer) as mongooseModel<any>
         const existingUser = await Model.findOne({email: formBody.email}).exec()
         if(existingUser){
