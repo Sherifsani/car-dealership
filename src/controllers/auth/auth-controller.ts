@@ -98,6 +98,7 @@ export const login = async (req: Request, res: Response) => {
 }
 export const changePassword = async(req: Request, res: Response) => {
     try{
+        const userId = req.userInfo.userId
         const { email, oldPassword, newPassword, role } = req.body
         if(!email || !oldPassword || !newPassword) {
             res.status(400).json({
@@ -106,7 +107,7 @@ export const changePassword = async(req: Request, res: Response) => {
             })
         }
         const Model = (role == "manager" ? Manager: Customer) as mongooseModel<any>
-        const user = await Model.findOne({email})
+        const user = await Model.findById(userId)
         if(!user){
             res.status(400).json({
                 success: false,
