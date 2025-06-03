@@ -5,7 +5,6 @@ import connectToDatabase from "./database/db";
 import carRoutes from "./routes/car-routes";
 import managerRoutes from "./routes/manager-routes";
 import customerRoutes from "./routes/customer-routes";
-import categoryRoutes from "./routes/category-routes";
 import authRoutes from "./routes/auth/auth-routes";
 
 configDotenv()
@@ -19,7 +18,6 @@ app.use(express.json())
 app.use("/api/cars", carRoutes)
 app.use("/api/managers", managerRoutes)
 app.use("/api/customers", customerRoutes)
-app.use("/api/categories", categoryRoutes)
 app.use("/api/auth", authRoutes)
 
 app.listen(port, () => {
