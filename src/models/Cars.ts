@@ -27,9 +27,10 @@ const CarSchema: Schema = new Schema<ICar>({
         type: String,
         required: true,
     },
-    category: [{
-        type: String,
-    }],
+    category: {
+        type: [String],
+        required: true
+    },
     availability: {
         type: Boolean,
         default: true
