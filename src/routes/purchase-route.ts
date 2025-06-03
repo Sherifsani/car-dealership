@@ -4,4 +4,6 @@ import authMiddleware from "../middlewares/auth-middleware";
 
 const purchaseRoute = express.Router()
 
-purchaseRoute.post("/car/purchase", authMiddleware, purchaseCar)
+purchaseRoute.post("/", authMiddleware, purchaseCar)
+
+export default purchaseRoute;

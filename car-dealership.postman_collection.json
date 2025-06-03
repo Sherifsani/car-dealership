@@ -1,0 +1,491 @@
+{
+	"info": {
+		"_postman_id": "aa756a6c-3586-48d4-9e20-3138d83166f1",
+		"name": "car-dealership",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "38957156"
+	},
+	"item": [
+		{
+			"name": "auth",
+			"item": [
+				{
+					"name": "customers",
+					"item": [
+						{
+							"name": "get all customers",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODNlZmM0NWFlZTRjMzkxZjEyN2QxODYiLCJlbWFpbCI6InRvbUBleGFtcGxlLmNvbSIsInJvbGUiOiJtYW5hZ2VyIiwiaWF0IjoxNzQ4OTU4NDg3LCJleHAiOjE3NDkwNDQ4ODd9.RQyK5ShPM01r_9LELeO2434bJnh4e1i_VsXH3owVCco",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/customers/get",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"customers",
+										"get"
+									]
+								},
+								"description": "### Get Customer Details\n\nThis endpoint is used to retrieve the details of all customers.\n\n#### Request Body\n\nThis is a GET request and does not require a request body.\n\n#### Response\n\n- Status: 200 OK\n    \n- Content-Type: application/json\n    \n\nExample Response Body:\n\n``` json\n{\n    \"success\": true,\n    \"data\": [\n        {\n            \"_id\": \"\",\n            \"firstname\": \"\",\n            \"lastname\": \"\",\n            \"email\": \"\",\n            \"password\": \"\",\n            \"role\": \"\",\n            \"purchasedCars\": [],\n            \"__v\": 0\n        }\n    ]\n}\n\n ```\n\nThe response contains a \"success\" flag indicating the success status of the request, and a \"data\" array containing customer details including their ID, first name, last name, email, password, role, and purchased cars."
+							},
+							"response": []
+						},
+						{
+							"name": "get customer by id",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODNlZmM0NWFlZTRjMzkxZjEyN2QxODYiLCJlbWFpbCI6InRvbUBleGFtcGxlLmNvbSIsInJvbGUiOiJtYW5hZ2VyIiwiaWF0IjoxNzQ4OTU4NDg3LCJleHAiOjE3NDkwNDQ4ODd9.RQyK5ShPM01r_9LELeO2434bJnh4e1i_VsXH3owVCco",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/customers/get/683efc6caee4c391f127d189",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"customers",
+										"get",
+										"683efc6caee4c391f127d189"
+									]
+								},
+								"description": "This endpoint makes an HTTP GET request to retrieve customer details based on the provided customer ID. The response will include the customer's information if found.\n\n### Request Body\n\nThis request does not require a request body.\n\n### Response Body\n\n- `success` (boolean): Indicates whether the request was successful.\n    \n- `data` (object): Contains the customer's details, including their ID, first name, last name, email, password, role, purchased cars, and version.\n    \n\nExample Response Body:\n\n``` json\n{\n    \"success\": true,\n    \"data\": {\n        \"_id\": \"\",\n        \"firstname\": \"\",\n        \"lastname\": \"\",\n        \"email\": \"\",\n        \"password\": \"\",\n        \"role\": \"\",\n        \"purchasedCars\": [],\n        \"__v\": 0\n    }\n}\n\n ```"
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"firstname\": \"david\",\n    \"lastname\": \"wibmer\",\n    \"role\": \"customer\",\n    \"email\":\"david@example.com\",\n    \"password\":\"password\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/auth/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"auth",
+								"register"
+							]
+						},
+						"description": "### Register User\n\nThis endpoint allows the client to register a new user with the provided details.\n\n#### Request Body\n\n- `firstname` (string, required): The first name of the user.\n    \n- `lastname` (string, required): The last name of the user.\n    \n- `role` (string, required): The role of the user.\n    \n- `email` (string, required): The email address of the user.\n    \n- `password` (string, required): The password for the user account.\n    \n\n#### Response\n\n- Status: 201 Created\n    \n- Content-Type: application/json\n    \n- `success` (boolean): Indicates if the registration was successful.\n    \n- `message` (string): A message related to the registration process.\n    \n- `data` (object): An object containing user data.\n    \n    - `firstname` (string): The first name of the registered user.\n        \n    - `lastname` (string): The last name of the registered user.\n        \n\n#### Example\n\n``` json\n{\n  \"success\": true,\n  \"message\": \"\",\n  \"data\": {\n    \"firstname\": \"\",\n    \"lastname\": \"\"\n  }\n}\n\n ```"
+					},
+					"response": [
+						{
+							"name": "register",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"firstname\": \"david\",\n    \"lastname\": \"wibmer\",\n    \"role\": \"customer\",\n    \"email\":\"david@example.com\",\n    \"password\":\"password\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/auth/register",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"auth",
+										"register"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "103"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"67-pc+Rh0GP4t5TA7dUc91m2hHVUZ0\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 03 Jun 2025 13:45:16 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"message\": \"User created successfully\",\n    \"data\": {\n        \"firstname\": \"david\",\n        \"lastname\": \"wibmer\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"tom@example.com\",\n    \"password\": \"password\",\n    \"role\": \"manager\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/auth/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"auth",
+								"login"
+							]
+						},
+						"description": "### Auth Login\n\nThis endpoint allows the user to authenticate and obtain an access token.\n\n#### Request Body\n\n- `email` (string): The email address of the user.\n    \n- `password` (string): The password of the user.\n    \n- `role` (string): The role of the user.\n    \n\n#### Response\n\n- Status: 200\n    \n- Content-Type: application/json\n    \n- `success` (boolean): Indicates if the authentication was successful.\n    \n- `message` (string): Additional information or error message.\n    \n- `accessToken` (string): The access token for the authenticated user.\n    \n\n#### Example\n\n``` json\n{\n  \"email\": \"tom@example.com\",\n  \"password\": \"password\",\n  \"role\": \"manager\"\n}\n\n ```\n\n``` json\n{\n  \"success\": true,\n  \"message\": \"\",\n  \"accessToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...\"\n}\n\n ```"
+					},
+					"response": []
+				},
+				{
+					"name": "change password",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODNjOGE0MDZmZWIwODE1NzVjYzg0ZmIiLCJlbWFpbCI6Imp0YWhAZXhhbXBsZS5jb20iLCJyb2xlIjoibWFuYWdlciIsImlhdCI6MTc0ODgwMDgxOCwiZXhwIjoxNzQ4ODg3MjE4fQ.4YrierCW23QO3HOXM7qk1EXCiAihag1Mx1K4yXUPjtk",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"jtah@example.com\",\n    \"oldPassword\": \"password-1\",\n    \"newPassword\":\"password-2\",\n    \"role\": \"manager\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/auth/change-password",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"auth",
+								"change-password"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "manager",
+			"item": [
+				{
+					"name": "get all managers",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODNkYTk1YTE5M2EwZWVhOTg3MGZlYjQiLCJlbWFpbCI6InN1ZEBleGFtcGxlLmNvbSIsInJvbGUiOiJtYW5hZ2VyIiwiaWF0IjoxNzQ4ODcxNjkyLCJleHAiOjE3NDg5NTgwOTJ9.2GLb_nBMVDuqNL8MkhQW8TcsFsHEvVPkEibTtHm2-a0",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/managers/get",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"managers",
+								"get"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "cars",
+			"item": [
+				{
+					"name": "get all cars",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"firstname\": \"Sani\",\n    \"lastname\": \"Sherif\",\n    \"email\": \"Sherif@example.com\",\n    \"password\": \"password\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/cars/get",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"cars",
+								"get"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "post car",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODNlYTgyMDAyODVmZTQ2OWEwMTkyZWEiLCJlbWFpbCI6ImRhbmllbEBleGFtcGxlLmNvbSIsInJvbGUiOiJtYW5hZ2VyIiwiaWF0IjoxNzQ4OTM2NzQ5LCJleHAiOjE3NDkwMjMxNDl9.dW8wi1mnn7rfODVAPmKMw11n0TYqFQJmH8Rh5RQ6tSg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"carModel\": \"Optima\",\n  \"price\": 65000,\n  \"year\": 2021,\n  \"manufacturer\": \"Nissan\",\n  \"categoryNames\": [\"Sedan\", \"Electric\"],\n  \"availability\": true,\n  \"stock\": 10\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/cars/post",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"cars",
+								"post"
+							]
+						},
+						"description": "### Create a New Car\n\nThis endpoint allows the client to create a new car entry.\n\n#### Request Body\n\n- carModel (text, required) - The model of the car.\n    \n- price (text, required) - The price of the car.\n    \n- year (text, required) - The manufacturing year of the car.\n    \n- manufacturer (text, required) - The manufacturer of the car.\n    \n- categoryNames (text, required) - The category names of the car.\n    \n- availability (text, required) - The availability status of the car.\n    \n- stock (text, required) - The stock quantity of the car.\n    \n\n#### Response (JSON Schema)\n\n``` json\n{\n  \"type\": \"object\",\n  \"properties\": {\n    \"success\": {\n      \"type\": \"boolean\"\n    },\n    \"data\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"carModel\": {\n          \"type\": \"string\"\n        },\n        \"price\": {\n          \"type\": \"number\"\n        },\n        \"year\": {\n          \"type\": \"number\"\n        },\n        \"manufacturer\": {\n          \"type\": \"string\"\n        },\n        \"category\": {\n          \"type\": \"array\",\n          \"items\": {\n            \"type\": \"string\"\n          }\n        },\n        \"availability\": {\n          \"type\": \"boolean\"\n        },\n        \"stock\": {\n          \"type\": \"number\"\n        },\n        \"_id\": {\n          \"type\": \"string\"\n        },\n        \"createdAt\": {\n          \"type\": \"string\"\n        },\n        \"updatedAt\": {\n          \"type\": \"string\"\n        },\n        \"__v\": {\n          \"type\": \"number\"\n        }\n      }\n    }\n  }\n}\n\n ```"
+					},
+					"response": []
+				},
+				{
+					"name": "get cars with filters",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"firstname\": \"Sani\",\n    \"lastname\": \"Sherif\",\n    \"email\": \"Sherif@example.com\",\n    \"password\": \"password\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/cars/get/filter/?category=Sedan",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"cars",
+								"get",
+								"filter",
+								""
+							],
+							"query": [
+								{
+									"key": "category",
+									"value": "Sedan"
+								}
+							]
+						},
+						"description": "### GET /api/cars/get/filter\n\nThis endpoint retrieves a list of cars based on the specified category.\n\n#### Request\n\n- Method: GET\n    \n- URL: `http://localhost:3000/api/cars/get/filter/?category=Sedan`\n    \n- Headers:\n    \n    - Content-Type: application/json\n        \n\n#### Response\n\nThe response is a JSON object with the following schema:\n\n``` json\n{\n  \"type\": \"object\",\n  \"properties\": {\n    \"success\": {\n      \"type\": \"boolean\"\n    },\n    \"data\": {\n      \"type\": \"array\",\n      \"items\": {\n        \"type\": \"object\",\n        \"properties\": {\n          \"_id\": {\n            \"type\": \"string\"\n          },\n          \"carModel\": {\n            \"type\": \"string\"\n          },\n          \"price\": {\n            \"type\": \"number\"\n          },\n          \"year\": {\n            \"type\": \"number\"\n          },\n          \"manufacturer\": {\n            \"type\": \"string\"\n          },\n          \"category\": {\n            \"type\": \"array\",\n            \"items\": {\n              \"type\": \"string\"\n            }\n          },\n          \"availability\": {\n            \"type\": \"boolean\"\n          },\n          \"stock\": {\n            \"type\": \"number\"\n          },\n          \"createdAt\": {\n            \"type\": \"string\"\n          },\n          \"updatedAt\": {\n            \"type\": \"string\"\n          },\n          \"__v\": {\n            \"type\": \"number\"\n          }\n        }\n      }\n    }\n  }\n}\n\n ```"
+					},
+					"response": []
+				},
+				{
+					"name": "delete car",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODNlZmM0NWFlZTRjMzkxZjEyN2QxODYiLCJlbWFpbCI6InRvbUBleGFtcGxlLmNvbSIsInJvbGUiOiJtYW5hZ2VyIiwiaWF0IjoxNzQ4OTU4NDg3LCJleHAiOjE3NDkwNDQ4ODd9.RQyK5ShPM01r_9LELeO2434bJnh4e1i_VsXH3owVCco",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/cars/delete/683f024eaee4c391f127d197",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"cars",
+								"delete",
+								"683f024eaee4c391f127d197"
+							]
+						},
+						"description": "The API endpoint sends an HTTP DELETE request to delete a specific car by its ID. Upon successful execution, the response will be in JSON format and will contain a schema with the following structure:\n\n``` json\n{\n  \"success\": boolean,\n  \"message\": string,\n  \"data\": {\n    \"_id\": string,\n    \"carModel\": string,\n    \"price\": number,\n    \"year\": number,\n    \"manufacturer\": string,\n    \"category\": array of strings,\n    \"availability\": boolean,\n    \"stock\": number,\n    \"createdAt\": string,\n    \"updatedAt\": string,\n    \"__v\": number\n  }\n}\n\n ```\n\nThe `success` field indicates whether the deletion operation was successful. The `message` field may contain additional information about the operation. The `data` field contains details of the deleted car, including its ID, model, price, year, manufacturer, category, availability, stock, creation timestamp, update timestamp, and version."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "purchase car",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODNlYTgyMDAyODVmZTQ2OWEwMTkyZWEiLCJlbWFpbCI6ImRhbmllbEBleGFtcGxlLmNvbSIsInJvbGUiOiJtYW5hZ2VyIiwiaWF0IjoxNzQ4OTM2NzQ5LCJleHAiOjE3NDkwMjMxNDl9.dW8wi1mnn7rfODVAPmKMw11n0TYqFQJmH8Rh5RQ6tSg",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"customerId\": \"683efc6caee4c391f127d189\",\n    \"carId\": \"683f06909b023e532704197c\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/purchase/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"purchase",
+						""
+					]
+				},
+				"description": "### Purchase API\n\nThis endpoint allows you to make a purchase by sending a POST request to the specified URL.\n\n#### Request Body\n\n- `customerId` (string) - The ID of the customer making the purchase.\n    \n- `carId` (string) - The ID of the car being purchased.\n    \n\n#### Response\n\nUpon successful execution, the server will respond with a status code of 201 and a JSON object containing the following fields:\n\n- `success` (boolean) - Indicates whether the purchase was successful.\n    \n- `message` (string) - Any additional message related to the purchase.\n    \n- `purchase` (object) - An object containing details of the purchase, including customer, car, price, ID, and date."
+			},
+			"response": []
+		}
+	]
+}
