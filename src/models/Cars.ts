@@ -5,8 +5,9 @@ export interface ICar extends Document{
     price: number,
     year: number,
     manufacturer: string,
-    category: mongoose.Types.ObjectId[],
+    category: string[],
     availability: boolean,
+    stock: number
 }
 
 const CarSchema: Schema = new Schema<ICar>({
@@ -27,12 +28,15 @@ const CarSchema: Schema = new Schema<ICar>({
         required: true,
     },
     category: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Category"
+        type: String,
     }],
     availability: {
         type: Boolean,
         default: true
+    },
+    stock: {
+        type: Number,
+        default: 1
     }
 }, {
     timestamps: true
