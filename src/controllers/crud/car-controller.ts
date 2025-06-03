@@ -1,7 +1,6 @@
 import Car from '../../models/Cars';
 import {generateCrudControllers} from "../../../utils/crudController";
 import {Request, Response} from "express"
-import Category from "../../models/Category";
 
 export const { getAll, getOne, remove, update} = generateCrudControllers(Car);
 
@@ -17,18 +16,12 @@ export const createCar = async (req: Request, res: Response) => {
             stock,
         } = req.body;
 
-        const categories = await Category.find({
-            name: { $in: categoryNames },
-        });
-
-        const categoryIds = categories.map((cat) => cat._id);
-
         const newCar = new Car({
             carModel,
             price,
             year,
             manufacturer,
-            category: categoryIds,
+            category: categoryNames, // Store category names directly
             availability,
             stock,
         });
@@ -38,10 +31,11 @@ export const createCar = async (req: Request, res: Response) => {
         res.status(201).json({ success: true, data: newCar });
     } catch (err) {
         console.error(err);
-        res.status(500).json({ success: false, message: "Failed to create car." });
+        res
+            .status(500)
+            .json({ success: false, message: "Failed to create car." });
     }
 };
-
 export const get = async (req: Request, res: Response) => {
     try {
         const page = parseInt(req.query.page as string) || 1;
